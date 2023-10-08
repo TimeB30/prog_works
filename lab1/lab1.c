@@ -2,7 +2,7 @@
 
 
 int main(int argc, char** argv) {
-	printf("\nhelloo niggers");
+	printf("\nhelloo niggerdds");
 	switch (command_rec(argc,argv)) {
 		case more_than_needs:
 			printf("Bad input: You enter more than 2 arguments\n");
