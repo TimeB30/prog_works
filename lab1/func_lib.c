@@ -18,7 +18,7 @@ unsigned long long int fctrl( unsigned int value){
 	return value * fctrl(value-1);
     
 }
-#ds
+
 long long int plow(int num, int degr) {
 	if (degr == 0){
 		return 1;
