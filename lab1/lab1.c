@@ -2,41 +2,46 @@
 
 
 int main(int argc, char** argv) {
-	printf("\nhelloo niggerdds");
-	switch (command_rec(argc,argv)) {
+	long long int* answer = char_to_int(argv);
+	long long int number = answer[0];
+	switch (command_rec(argc,argv,answer)) {
 		case more_than_needs:
 			printf("Bad input: You enter more than 2 arguments\n");
 			break;
 		case less_than_needs:
 			printf("Bad input: You did not enter 2 arguments\n");
 			break;
+		case no_allocation:
+			printf("Error: Memory for number is not allocated");
 		case not_number:
-			printf("You enter not a number\n");
+			printf("Bad input: not number");
 			break;
 		case wrong_flag:
 			printf("You enter wrong flag\n");
 			break;
-		case multiplicity:{
-			
-			int number = char_to_int(argv)[0];			
+		case multiplicity:		
 			if (number == 0){
 				printf("Can not divide by 0\n");
 				break;
 			}
 			int* result = narutal_multiplicities(number);
 			int i = 0;
-			while(true){
-				if (result[i] == -5){
-					break;
+			if (result[0] == 1){
+				printf("Error: Memory for result is not allocated");
+				break;
+			}
+			else{
+				while(true){
+					if (result[i] == -1){
+						break;
+					}
+					printf("%d ",result[i]);
+					i += 1;
 				}
-				printf("%d ",result[i]);
-				i += 1;
 			}
 			printf("\n");
 			break;
-		}
 		case simp_comp_check:{
-			int number = char_to_int(argv)[0];
 			int is_simple =  check_to_simple(number);
 			if (is_simple == 1){
 				printf("Number is simple \n");
@@ -69,7 +74,6 @@ int main(int argc, char** argv) {
 		break;
 		}
 		case degree_table:{
-			int number = char_to_int(argv)[0];
 			if (number < 1){
 				printf("Number is lower than 1\n");
 				break;
@@ -93,7 +97,7 @@ int main(int argc, char** argv) {
 			break;
 		}
 		case summ_numbers:{
-			int number = char_to_int(argv)[0];
+			
 			if (number < 1){
 				printf("Number is lower than 1\n");
 				break;
@@ -104,7 +108,6 @@ int main(int argc, char** argv) {
 			break;
 		}
 		case factorial:{ 
-			int number = char_to_int(argv)[0];
 			
 			if (number == 0){
 				printf("0\n");

@@ -29,44 +29,51 @@ long long int plow(int num, int degr) {
 	}
 	return answer;
 }
-long long int* char_to_int(char** value) {
+long long int* char_to_int(char* value[]) {
 	long long int* answer = calloc(2,sizeof(long long int));
+	if (answer == NULL){
+		answer[1] = 2;
+		return answer;
+	}
 	char* string = value[2];
-	// int answer = 0;
+	int string_len = strlen(string);
 	bool negative = false;
 	int i = 0;
-	int coefficient = strlen(string)- 1;
 	if (string[0] == '-') {
 		negative = true;
 		i = 1;
 		
 	}
-	for (i; i < strlen(string); i++) {
+	for (i; i < string_len; i++) {
 		if (((string[i] < 48) || (string[i] > 57))) {
 			answer[1] = 1;
 			return answer;	
 		}
 		else {
 			int num = string[i] - 48;
-			answer[0] += num * plow(10, coefficient - i);
+			answer[0] = answer[0] * 10 + num;
 		}
 	 }
+	 
 	if (negative) {
 		answer[0] *= -1;
 	}
 	return answer;
 }
 
-enum flags command_rec(int argc,char** argv) {
+enum flags command_rec(int argc,char** argv,long long int* answer) {
     if (argc > 3){
 		return more_than_needs;
 	}
 	else if (argc < 3){
 		return less_than_needs;
-	} 
-    else if (char_to_int(argv)[1] == 1){
-        return not_number;
-    }
+	}
+	else if (answer[1] == 2){
+		return no_allocation;
+	}
+	else if (answer[1] == 1){
+		return not_number;
+	}
 	if ((!strcmp(argv[1], "-h")) || (!strcmp(argv[1], "/h"))) {
 		return multiplicity;
 	}
@@ -91,15 +98,19 @@ enum flags command_rec(int argc,char** argv) {
 }
 
 int* narutal_multiplicities(int num){
-	int* answer = calloc(122,sizeof(int));
-	int index =  0;
-	for (int i = 0; i < 101; i++){
-		if (i % num == 0){
-			answer[index] = i;
-			index += 1;
-		}
+	int size = 100 / num + 1;
+	int* answer = calloc(size,sizeof(int));
+	if (answer == NULL){
+		answer[0] == 1; //allocation status report
+		return answer;
 	}
-	answer[index] = -5;
+	else{
+		answer[0] = 0;
+		answer[size] = -1;
+	}
+	for (int i = 1; i < size; i++){
+		answer[i] = num * i;  
+	}
 	return answer;
 }
 int check_to_simple(int num){

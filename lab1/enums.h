@@ -8,7 +8,8 @@ enum flags {
     not_number,
 	wrong_flag,
     more_than_needs,
-    less_than_needs
+    less_than_needs,
+	no_allocation
 
 };
 
