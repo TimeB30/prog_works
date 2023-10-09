@@ -2,43 +2,38 @@
 #include<string.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include<math.h>
 #include"enums.h"
 
 
 
 
 unsigned long long int fctrl( unsigned int value){
-
-	if (value > 20){
-		return 0;
+	unsigned long long answer = 0;
+	if ((value > 20) || (value < 0)){
+		return answer;
 	}
-	if (value == 1){
-		return 1;
+	else if ((value == 1) || (value == 0)){
+		answer = 1;
+		return answer;
 	}
 	return value * fctrl(value-1);
     
 }
 
-long long int plow(int num, int degr) {
-	if (degr == 0){
-		return 1;
-	}
-	long long int answer = num;
-	for (int i = 0; i < degr-1; i++) {
-		answer *= num;
-	}
-	return answer;
-}
 long long int* char_to_int(char* value[]) {
-	long long int* answer = calloc(2,sizeof(long long int));
+	long long int* answer = (long long int*)calloc(2,sizeof(long long int));
+	char* string = value[1];
+	int string_len = strlen(string);
+	bool negative = false;
+	int i = 0;
+	if (string_len > 19){
+		answer[1] = 3;
+	}
 	if (answer == NULL){
 		answer[1] = 2;
 		return answer;
 	}
-	char* string = value[2];
-	int string_len = strlen(string);
-	bool negative = false;
-	int i = 0;
 	if (string[0] == '-') {
 		negative = true;
 		i = 1;
@@ -62,11 +57,15 @@ long long int* char_to_int(char* value[]) {
 }
 
 enum flags command_rec(int argc,char** argv,long long int* answer) {
+	char* string = argv[2];
     if (argc > 3){
 		return more_than_needs;
 	}
 	else if (argc < 3){
 		return less_than_needs;
+	}
+	else if (answer[1] == 3){
+		return too_big_number;
 	}
 	else if (answer[1] == 2){
 		return no_allocation;
@@ -74,32 +73,40 @@ enum flags command_rec(int argc,char** argv,long long int* answer) {
 	else if (answer[1] == 1){
 		return not_number;
 	}
-	if ((!strcmp(argv[1], "-h")) || (!strcmp(argv[1], "/h"))) {
-		return multiplicity;
+	if ((string[0] == '-') || (string[0] == '/')){
+		if (string[1] == 'h') {
+			return multiplicity;
+		}
+		else if (string[1] == 'p') {
+			return simp_comp_check;
+		}
+		else if (string[1] == 's') {
+			return separate;
+		}
+		else if (string[1] == 'e') {
+			return degree_table;
+		}
+		else if (string[1] == 'a') {
+			return summ_numbers;
+		}
+		else if (string[1] == 'f') {
+			return factorial;
+		}
+		else{
+			return wrong_flag;
+		}
 	}
-	else if ((!strcmp(argv[1], "-p")) || (!strcmp(argv[1], "/p"))) {
-		return simp_comp_check;
-	}
-	else if ((!strcmp(argv[1], "-s")) || (!strcmp(argv[1], "/s"))) {
-		return separate;
-	}
-	else if ((!strcmp(argv[1], "-e")) || (!strcmp(argv[1], "/e"))) {
-		return degree_table;
-	}
-	else if ((!strcmp(argv[1], "-a")) || (!strcmp(argv[1], "/a"))) {
-		return summ_numbers;
-	}
-	else if ((!strcmp(argv[1], "-f")) || (!strcmp(argv[1], "/f"))) {
-		return factorial;
-	}
-    else {
+	else{
 		return wrong_flag;
-	} 
+	}
+	
+    
 }
 
 int* narutal_multiplicities(int num){
 	int size = 100 / num + 1;
-	int* answer = calloc(size,sizeof(int));
+	int* answer = (int*)calloc(size,sizeof(int));
+	int buff = 0;
 	if (answer == NULL){
 		answer[0] == 1; //allocation status report
 		return answer;
@@ -109,29 +116,30 @@ int* narutal_multiplicities(int num){
 		answer[size] = -1;
 	}
 	for (int i = 1; i < size; i++){
-		answer[i] = num * i;  
+		buff += num;
+		answer[i] = buff ;  
 	}
 	return answer;
 }
 int check_to_simple(int num){
+	int limit = sqrt(num);
+	int count = 1;
     if (num < 2){
         return 3;
     }
     else if (num == 2){	
         return 1;
     }
-	int count = 0;
-	for (int i = 1; i <= (int)(num/2); i++){
+	for (int i = 2; i <= limit; i++){
 		if (num % i == 0){
 			count += 1;
            
 		}
+		if (count > 2){
+			return 0;
+		}
 	}
    
-	if (count == 1){
-		return 1;
-	}
-	else{
-		return 0;
-	}
+	return 1;
+
 }

@@ -11,6 +11,9 @@ int main(int argc, char** argv) {
 		case less_than_needs:
 			printf("Bad input: You did not enter 2 arguments\n");
 			break;
+		case too_big_number:
+			printf("The number is too big\n");
+			break;
 		case no_allocation:
 			printf("Error: Memory for number is not allocated");
 		case not_number:
@@ -41,7 +44,7 @@ int main(int argc, char** argv) {
 			}
 			printf("\n");
 			break;
-		case simp_comp_check:{
+		case simp_comp_check:
 			int is_simple =  check_to_simple(number);
 			if (is_simple == 1){
 				printf("Number is simple \n");
@@ -53,27 +56,25 @@ int main(int argc, char** argv) {
 				printf("Number is compound \n");
 			}
 			break;
-		}
-		case separate:{
+		case separate:
+			int string_len = strlen(argv[1]);
+			char* string = argv[1];
 			int zero_indicator = 1;
-			while (true){
-				for (int i = 0; i < strlen(argv[2]); i++){
-					if (zero_indicator){
-						if (argv[2][i] != '0'){
-							printf("%c ",argv[2][i]);
-							zero_indicator = 0;				
-				    	}
-					}	
-					else{
-						printf("%c ",argv[2][i]);
+			for (int i = 0; i < string_len; i++){
+				if (zero_indicator){
+					if (string[i] != '0'){
+						printf("%c ",string[i]);
+						zero_indicator = 0;				
 					}
-				}
-				break;
+				}	
+				else{
+					printf("%c ",string[i]);
+				}		
 			}
 			printf("\n");
 		break;
-		}
-		case degree_table:{
+		
+		case degree_table:
 			if (number < 1){
 				printf("Number is lower than 1\n");
 				break;
@@ -87,45 +88,44 @@ int main(int argc, char** argv) {
 				printf("%11d  ",i);
 			}
 			printf("\n\n\n\n");
-			for (int i = 1; i < 11; i++){
+			printf(" 1");
+			for (int i = 0; i < number; i++){
+					
+					printf("%11d  ",1);
+				}
+			printf("\n\n\n\n");
+			for (int i = 2; i < 11; i++){
 				printf("%2d",i);
-				for(int n = 1; n < number + 1; n++){
-					printf("%11lld  ",plow(i,n));
+				int buff = i;
+				printf("%11d  ",i);
+				for(int n = 2; n <= number; n++){
+					buff *= i;
+					printf("%11d  ",buff);
 				}
 				printf("\n\n\n\n");
 			}
-			break;
-		}
-		case summ_numbers:{
+		break;
+		case summ_numbers:
 			
-			if (number < 1){
-				printf("Number is lower than 1\n");
-				break;
-			}
-			unsigned long long int summ = 1;
-			summ = (1+number)*number/2;
-			printf("%llu\n",summ);
+				if (number < 1){
+					printf("Number is lower than 1\n");
+					break;
+				}
+				unsigned long long int summ = 1;
+				summ = (1+number)*number/2;
+				printf("%llu\n",summ);
 			break;
-		}
-		case factorial:{ 
-			
-			if (number == 0){
-				printf("0\n");
-			}
-			else if (number < 0){
-				printf("The number is smaller than 0\n");
-			}
-			else if (number > 20){
-				printf("The number is too big\n");
-			}
-			else{
-				unsigned long long int result = fctrl(number);
-				printf("\n%llu",result);
-			}
+		case factorial:
+				unsigned long long int result2 = fctrl(number);
+				if (result2 == 0){
+					printf("Number is negative or too big\n");
+				}
+				else{
+					printf("%llu\n",result2);
+				}
 			break;
-		}
-		
 		
 	}
 	return 0;
 }
+
