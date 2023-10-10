@@ -4,22 +4,11 @@
 #include<stdbool.h>
 #include<math.h>
 #include"enums.h"
-enum flags situaition(double* result){
-    if #cont flags
-}
-long long int plow(int num, int degr) {
-	if (degr == 0){
-		return 1;
-	}
-	long long int answer = num;
-	for (int i = 0; i < degr-1; i++) {
-		answer *= num;
-	}
-	return answer;
-}
+
 
 long double* char_to_double(char* argv[]){
     long double* answer = calloc(2,sizeof(long double));
+    
     char* string = argv[1];
     bool dot_detector = false;
     int coefficient = 0;
