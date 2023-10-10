@@ -41,7 +41,7 @@ long double e_func(long double epsilon){
     long double middle;
     while(fabs((line_right - line_left)) > epsilon){
         middle = (line_left + line_right) / 2.0;
-        if ((logl(middle) - 1) > middle){
+        if ((logl(middle) - 1) >= middle){
             line_left = middle;
         }
         else{
