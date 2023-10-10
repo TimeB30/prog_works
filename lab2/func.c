@@ -6,53 +6,47 @@
 #include"enums.h"
 
 
-long double* char_to_double(char* argv[]){
-    long double* answer = calloc(2,sizeof(long double));
-    
-    char* string = argv[1];
-    bool dot_detector = false;
-    int coefficient = 0;
-    for (int i = 0; i < strlen(string); i++){
-        if (string[i] == '.'){
-            coefficient = i-1;
-            break;
-        }
+long double e_limit(long double epsilon){
+    long double value = 1.0;
+    int n = 1;
+    while(value > epsilon){
+        value = 1.0/n;
+        n++; 
     }
-    if (string[0] == '-'){
-         answer[1] = 1.0;   
-         return answer;
+    value = powl((1 + value),n);
+    return value;
+
+}
+
+
+long double e_summ(long double epsilon){
+    long double  n = 2.0;
+    long double first_val = 1.0;
+    long double second_val = 0;
+    long double value = first_val * 2;
+    while(fabs(first_val - second_val) > epsilon){
+        second_val = first_val*1/n;       
+        value += second_val;
+        first_val = second_val;
+        second_val = 0;
+        n++;
     }
-    for (int i = 0; i < strlen(string);i++){
-        if (string[i] == '.'){
-            if (dot_detector){
-                answer[1] = 1.0;
-                return answer;
-            }
-            dot_detector = true;
-        }
-        else if (dot_detector){
-             if (((string[i] < 48) || (string[i] > 57))) {
-                answer[1] = 1.0;
-                return answer;
-            }
-            else{
-                // printf("hey %lf",(1.0/(1*plow(10,i-coefficient-1))));
-                double num = string[i] - 48;
-                answer[0] += num/(1*plow(10,i-coefficient-1));
-            }
+    return value;
+
+}
+
+long double e_func(long double epsilon){
+    long double line_left = 2.0;
+    long double line_right = 3.0;
+    long double middle;
+    while(fabs((line_right - line_left)) > epsilon){
+        middle = (line_left + line_right) / 2.0;
+        if ((logl(middle) - 1) > middle){
+            line_left = middle;
         }
         else{
-            if (((string[i] < 48) || (string[i] > 57))) {
-                answer[1] = 1.0;
-                return answer;
-            }
-            else {
-                double num = string[i] - 48;
-                answer[0] += num * plow(10, coefficient - i);
-		    }
+            line_right = middle;
         }
-		
-
     }
-    return answer;
-}   
+    return middle;
+}
