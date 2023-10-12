@@ -23,6 +23,10 @@ unsigned long long int fctrl( unsigned int value){
 
 long long int* char_to_int(char* value[]) {
 	long long int* answer = (long long int*)calloc(2,sizeof(long long int));
+	if (answer == NULL){
+		answer[0] == 1; //allocation status report
+		return answer;
+	}
 	char* string = value[1];
 	int string_len = strlen(string);
 	bool negative = false;
@@ -104,6 +108,7 @@ enum flags command_rec(int argc,char** argv,long long int* answer) {
 }
 
 int* narutal_multiplicities(int num){
+	num = fabs(num);
 	int size = 100 / num + 1;
 	int* answer = (int*)calloc(size,sizeof(int));
 	int buff = 0;
@@ -132,12 +137,13 @@ int check_to_simple(int num){
     }
 	for (int i = 2; i <= limit; i++){
 		if (num % i == 0){
-			count += 1;
+			return 0;
+			//count += 1;
            
 		}
-		if (count > 2){
-			return 0;
-		}
+		// if (count > 1){
+		// 	return 0;
+		// }
 	}
    
 	return 1;

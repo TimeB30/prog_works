@@ -15,9 +15,9 @@ int main(int argc, char** argv) {
 			printf("The number is too big\n");
 			break;
 		case no_allocation:
-			printf("Error: Memory for number is not allocated");
+			printf("Error: Memory for number is not allocated\n");
 		case not_number:
-			printf("Bad input: not number");
+			printf("Bad input: not number\n");
 			break;
 		case wrong_flag:
 			printf("You enter wrong flag\n");

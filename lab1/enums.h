@@ -10,7 +10,8 @@ enum flags {
     more_than_needs,
     less_than_needs,
 	no_allocation,
-	too_big_number
+	too_big_number,
+	
 
 };
 
