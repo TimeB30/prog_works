@@ -11,7 +11,7 @@ enum flags {
     less_than_needs,
 	no_allocation,
 	too_big_number,
-	
+	asdfasdf
 
 };
 
