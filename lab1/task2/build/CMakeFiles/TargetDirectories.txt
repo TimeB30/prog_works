@@ -1,0 +1,4 @@
+/home/timeb/Desktop/labs/lab2/build/CMakeFiles/lab2.dir
+/home/timeb/Desktop/labs/lab2/build/CMakeFiles/mylib.dir
+/home/timeb/Desktop/labs/lab2/build/CMakeFiles/edit_cache.dir
+/home/timeb/Desktop/labs/lab2/build/CMakeFiles/rebuild_cache.dir
