@@ -2,7 +2,7 @@
 
 
 int main(int argc, char** argv){
-    
+    //say hello
 
     switch (command_rec(argc,argv))
     {
