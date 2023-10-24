@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+#include<ctype.h>
 
 enum flags command_rec(int argc,char** argv) {
 	char* string = argv[1];
@@ -18,7 +18,7 @@ enum flags command_rec(int argc,char** argv) {
                 return len;
             }
             else if (string[1] == 'r') {
-                return reverse;
+                return reverse_str;
             }
             else if (string[1] == 'u') {
                 return odd_up;
@@ -35,16 +35,42 @@ enum flags command_rec(int argc,char** argv) {
     
 }
 
-char* reverse(char * string,int status){
+void reverse(char * string,int* status){
     long int string_len = strlen(string);
     char* answer = malloc(string_len*sizeof(char));
     if (answer == NULL){
-        status = 1;
-        return answer;
+        *status = 1;
+        return;
     }
     for (int i = string_len - 1; i > -1; i-- ){
-        answer[string_len - i + 1] = string[i];
+        answer[string_len-i-1] = string[i];
     }
-    return answer;
+    strcpy(string,answer);
+    free(answer);
+    answer = NULL;
+    return;
 
+
+}
+void odd_up_str(char* string,int* status){
+    long int string_len = strlen(string);
+    for (int i = 0; i < string_len; i++){
+        if (i % 2 != 0){
+            string[i] = toupper(string[i]);
+        }
+    }
+    return;
+}
+
+void numb_symb_str(char* string, int* status){
+    long int string_len = strlen(string);
+    char* answer = malloc(string_len*sizeof(char));
+    if (answer == NULL){
+        *status = 1;
+        return;
+    }
+    for (int i = string_len - 1; i > -1; i-- ){
+        answer[string_len-i-1] = string[i];
+    }
+    
 }

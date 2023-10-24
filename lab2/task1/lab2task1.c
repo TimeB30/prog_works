@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv){
     //say hello
-    int status = 0;
+    int* status = 0;
     char* string = argv[2];
     long int string_len = strlen(argv[2]);
     switch (command_rec(argc,argv))
@@ -18,7 +18,15 @@ int main(int argc, char** argv){
             printf("The length is %ld\n",string_len);
             break;
         case reverse_str:
-            printf("%s\n",revese(string,status));
+            reverse(string,status);
+            printf("%s\n",string);
+            break;
+        case odd_up:
+            odd_up_str(string,status);
+            printf("%s \n",string);
+            break;
+        case num_symb:
+            
             break;
 
    
