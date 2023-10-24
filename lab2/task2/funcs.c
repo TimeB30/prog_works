@@ -20,7 +20,10 @@ double fast_pow(double d_num, int n){
     double buff;
     int n2 = abs(n);
     if (n2 == 1){
-    return d_num;
+        return d_num;
+    }
+    else if (n2 == 0){
+        return 1.0;
     }
     else if (n2 % 2 == 0){
         buff = fast_pow(d_num,n2/2);
@@ -34,5 +37,6 @@ double fast_pow(double d_num, int n){
         buff = 1.0/buff;
         return buff;
     }
+    return buff;
 
 }
