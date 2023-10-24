@@ -8,7 +8,7 @@ double average_geom_value(int n, ...){
     va_list factor;
     va_start(factor,n);
     for (int i = 0; i < n; i++){
-        answer *= va_arg(factor,int);       
+        answer *= va_arg(factor,int);  
     }
     va_end(factor);
     answer = sqrt(answer);
