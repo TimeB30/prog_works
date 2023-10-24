@@ -18,23 +18,21 @@ double average_geom_value(int n, ...){
 
 double fast_pow(double d_num, int n){
     double buff;
-    if (n == 0){
-        return 1;
+    int n2 = abs(n);
+    if (n2 == 1){
+    return d_num;
     }
-    else if (n == 1){
-        return d_num;
-    }
-    else if (n % 2 == 0){
-        double buff = fast_pow(d_num,n/2);
+    else if (n2 % 2 == 0){
+        buff = fast_pow(d_num,n2/2);
         buff *= buff;
     }
     else {
-        double buff = fast_pow(d_num,n-1);
+        buff = fast_pow(d_num,n2-1);
         buff *= d_num;
     }
-    if (d_num <  0){
+    if (n <  0){
         buff = 1.0/buff;
         return buff;
     }
-    return buff;
+
 }
