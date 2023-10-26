@@ -122,7 +122,7 @@ int* concatenation_str(char** argv,int* argc,int* status,unsigned int string_qua
     unsigned int index_count = 0;
     srand(time(NULL));
     int r = rand() % string_quantity + 1;
-    if ((indexes == NULL) || (*argc != string_quantity+2)){
+    if ((indexes == NULL) || (*argc != string_quantity+3)){
         *status = 1;
         return indexes;
     }
