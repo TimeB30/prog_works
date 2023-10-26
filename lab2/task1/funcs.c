@@ -5,7 +5,7 @@
 #include<ctype.h>
 #include<stdbool.h>
 
-
+#include<time.h>
 
 
 bool is_num(int num){
@@ -104,7 +104,13 @@ void numb_symb_str(char* string, int* status){
     
 }
 void concatenation_str(char** argv,int* status){
-    int string_quantity = strtol(argv[2]);
+    char* end;
+    int string_quantity = strtol(argv[2],&end,10);
+    printf("%d \n",string_quantity);
+    srand(time(NULL));
+    int r = rand() % (string_quantity);
+            
+    printf("%d \n",r);
 
 
 }

@@ -1,6 +1,4 @@
 #include"funcs.c"
-
-
 int main(int argc, char** argv){
     //say hello
     int* status = malloc(sizeof(int));
@@ -42,8 +40,8 @@ int main(int argc, char** argv){
             printf("%s \n",string);
             break;
         case concatenation:
+            concatenation_str(argv,status);
             
-   
 
 
 
