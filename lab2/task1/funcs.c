@@ -4,7 +4,6 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdbool.h>
-
 #include<time.h>
 
 
@@ -18,10 +17,10 @@ bool is_num(int num){
 
 enum flags command_rec(int argc,char** argv) {
 	char* string = argv[1];
-    if (argc > 3){
+    if ((argc > 3) && (string[1] != 'c')){
 		return more_than_needs;
 	}
-	else if (argc < 3){
+	 if (argc < 3){
 		return less_than_needs;
     }
     else{
@@ -41,7 +40,13 @@ enum flags command_rec(int argc,char** argv) {
             else if (string[1] == 'c') {
                 return concatenation;
             }
+            else{
+                return wrong_flag;
+            }
             
+        }
+        else{
+            return wrong_flag;
         }
     }
     
@@ -50,7 +55,7 @@ enum flags command_rec(int argc,char** argv) {
 
 void reverse(char * string,int* status){
     long int string_len = strlen(string);
-    char* answer = malloc(string_len*sizeof(char));
+    char* answer = (char*)malloc(string_len*sizeof(char));
     if (answer == NULL){
         *status = 1;
         return;
@@ -77,13 +82,13 @@ void odd_up_str(char* string,int* status){
 
 void numb_symb_str(char* string, int* status){
     long int string_len = strlen(string);
-    char* symbs = malloc(sizeof(char)*string_len);
+    char* symbs = (char*)malloc(sizeof(char)*string_len);
+    int index_counter_nums = 0;
+    int index_counter_symbs = 0;
     if (symbs == NULL){
         *status = 1;
         return;
     }
-    int index_counter_nums = 0;
-    int index_counter_symbs = 0;
     for (int i = 0; i < string_len; i++ ){
         if (is_num(string[i])){
             string[index_counter_nums] = string[i];
@@ -103,14 +108,31 @@ void numb_symb_str(char* string, int* status){
     return;
     
 }
-void concatenation_str(char** argv,int* status){
-    char* end;
-    int string_quantity = strtol(argv[2],&end,10);
-    printf("%d \n",string_quantity);
+bool number_in_array(int* num_array,int array_size, int num2){
+    for(int i = 0; i < array_size;i++){
+        if (num_array[i] == num2){
+            return true;
+        }
+    }
+    return false;
+}
+int* concatenation_str(char** argv,int* argc,int* status,unsigned int string_quantity){
+    unsigned int* indexes = (int*)calloc(string_quantity,sizeof(unsigned int));
+    unsigned int last_string_index =  string_quantity-1;
+    unsigned int index_count = 0;
     srand(time(NULL));
-    int r = rand() % (string_quantity);
-            
-    printf("%d \n",r);
-
+    int r = rand() % string_quantity + 1;
+    if ((indexes == NULL) || (*argc != string_quantity+2)){
+        *status = 1;
+        return indexes;
+    }
+    while(indexes[last_string_index] == 0){
+        r = rand() % (string_quantity) + 1;
+        if (!number_in_array(indexes,string_quantity,r)){
+            indexes[index_count] = r;
+            index_count++;
+        }
+    }
+    return indexes;
 
 }

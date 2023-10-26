@@ -5,5 +5,6 @@ enum flags{
     reverse_str,
     odd_up,
     num_symb,
-    concatenation
+    concatenation,
+    wrong_flag
 };
