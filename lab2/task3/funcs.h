@@ -25,45 +25,45 @@ char** find_string(int string_count, ...){
     va_start(list,string_count);
     char* string = va_arg(list,char*);
     unsigned int string_len = strlen(string);
+    printf("string len is %d\n",string_len);
     unsigned int las_index = string_len-1;
     for(int i = 1; i < string_count; i++){
         unsigned int count_lines = 1;
-        unsigned int count_indexes = 0;
+        unsigned int count_index = 1;
         char* file_name = va_arg(list,char*);
         char* comparable = malloc(sizeof(char)*string_len);
         FILE* file = fopen(file_name,"r");
         char buff = 'a';
         int count = 0;
         printf("%s \n",file_name);
-        for(int i = 0; i < string_len;i++){
-            comparable[i] = fgetc(file);
-            count_indexes++;
-            if (comparable[i] == '\n'){
-                count_lines++;
-                count_indexes = 0;
-            }
-            
-        }
-        if (compare_strings(comparable,string,string_len)){
-            printf("Line: %u  Index: %u\n",count_lines,count_indexes-string_len);
-        }
         while(1){
-            move_values_left(comparable,string_len);
             buff = fgetc(file);
-            count_indexes++;
+            count_index++;
             if (buff == EOF){
                 break;
             }
-            if (buff == '\n'){
-                count_lines++;
-                count_indexes = 0;
+            else if (buff == string[count]){
+                comparable[count] = buff;
+                count++;
+                if (count == string_len){
+                    
+                    printf("Line: %u  Index: %u\n",count_lines,count_index-count);
+                }
             }
-            comparable[las_index] = buff;
-            if (compare_strings(comparable,string,string_len)){
-                printf("Line: %u  Index: %u\n",count_lines,count_indexes-string_len);
-            }
+            else{
+                fseek(file,-(sizeof(char)*(count)),SEEK_CUR);
+                count_index -= count;
+                // printf("%d \n",count_index);
+                if ((buff == '\n') && (count == 0)){
+                    count_lines++;
+                    count_index = 0;
+                }
+                count = 0;
+            
         }
     }
+}
+
 }
 
 
