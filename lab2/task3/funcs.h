@@ -35,45 +35,42 @@ char** find_string(int string_count, ...){
         FILE* file = fopen(file_name,"r");
         char buff = 'a';
         int count = 0;
+        char past_char = 'a';
         printf("%s \n",file_name);
         while(1){
             buff = fgetc(file);
-            // printf("%c",buff);
+            printf("past %c  buff %c  string %c  count %d line %d\n",past_char,buff,string[count],count,count_lines);
             if (buff == EOF){
                 break;
             }
             else if (buff == string[count]){
-                comparable[count] = buff;               
+                comparable[count] = buff; 
+                // printf("buff %c  string %c  count %d \n",buff,string[count],count);
                 count++;
                 if (count == string_len){
                     printf("Line: %u  Index: %u\n",count_lines,count_index);
-                    // printf("count: %u\n    index: %u",count,count_index);
-                    count = 0;
-                    // count_index++;
-                    //!! problem with \\n\\n
+                     fseek(file,-(sizeof(char)*(count-1)),SEEK_CUR);
+                     past_char = comparable[0];
+                     count_index++;  
+                    count = 0;  
                 }
-                if ((buff == '\n') && (count == 1)){  //или count == 1
-                printf("%s\n",comparable);
+                if (past_char == '\n'){
                 count_lines++;
-                count_index = 1;
-                // printf("up");
-            }
-            }
-            else if ((buff == '\n') && (count == 1)){  //или count == 1
-                printf("%s\n",comparable);
-                count_lines++;
-                count_index = 1;
-                // printf("up");
-            }           
+                count_index = 0;
+                }                                                      
+            }                             
             else{
+                if (past_char == '\n'){
+                    printf("Nigga\n");
+                count_lines++;
+                count_index = 0;
+                }     
                 fseek(file,-(sizeof(char)*(count)),SEEK_CUR);
+                past_char = comparable[0];
                 count_index++;
                 count = 0;  
             }
-         
-         
-            
-            
+         past_char = buff;            
     }
 }
 
@@ -127,3 +124,12 @@ char** find_string(int string_count, ...){
 // }
 
 
+
+
+
+ // else if ((buff == '\n') && (count == 1)){  //или count == 1
+            //     printf("%s\n",comparable);
+            //     count_lines++;
+            //     count_index = 1;
+            //     // printf("up");
+            // }    

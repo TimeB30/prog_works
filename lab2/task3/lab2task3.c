@@ -3,7 +3,8 @@
 int main(){
     int status = 0;
     
-    find_string(2,"\n\n","file1.txt");
+
+    find_string(2,"tima\n","file1.txt");
 
 
 
