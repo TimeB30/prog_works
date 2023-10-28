@@ -104,7 +104,7 @@ void numb_symb_str(char* string, int* status){
         index_counter_nums++;
     }  
     
-
+    free(symbs);
     return;
     
 }
