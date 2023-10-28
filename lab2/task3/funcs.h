@@ -38,29 +38,27 @@ char** find_string(int string_count, ...){
         printf("%s \n",file_name);
         while(1){
             buff = fgetc(file);
+            printf("%c",buff);
             count_index++;
             if (buff == EOF){
                 break;
             }
             else if (buff == string[count]){
-                comparable[count] = buff;
+                comparable[count] = buff;               
                 count++;
                 if (count == string_len){
-                    
                     printf("Line: %u  Index: %u\n",count_lines,count_index-count);
+                    count = 0;
                 }
             }
             else{
                 fseek(file,-(sizeof(char)*(count)),SEEK_CUR);
                 count_index -= count;
-                // printf("%d \n",count_index);
-                if ((buff == '\n') && (count == 0)){
-                    count_lines++;
-                    count_index = 0;
-                }
-                count = 0;
-            
-        }
+                count = 0;  
+            }
+            if (buff = '\n') && (count == 0){  //или count == 1
+                count_lines++;
+            }
     }
 }
 
