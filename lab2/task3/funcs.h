@@ -38,8 +38,7 @@ char** find_string(int string_count, ...){
         printf("%s \n",file_name);
         while(1){
             buff = fgetc(file);
-            printf("%c",buff);
-            count_index++;
+            // printf("%c",buff);
             if (buff == EOF){
                 break;
             }
@@ -47,18 +46,34 @@ char** find_string(int string_count, ...){
                 comparable[count] = buff;               
                 count++;
                 if (count == string_len){
-                    printf("Line: %u  Index: %u\n",count_lines,count_index-count);
+                    printf("Line: %u  Index: %u\n",count_lines,count_index);
+                    // printf("count: %u\n    index: %u",count,count_index);
                     count = 0;
+                    // count_index++;
+                    //!! problem with \\n\\n
                 }
+                if ((buff == '\n') && (count == 1)){  //или count == 1
+                printf("%s\n",comparable);
+                count_lines++;
+                count_index = 1;
+                // printf("up");
             }
+            }
+            else if ((buff == '\n') && (count == 1)){  //или count == 1
+                printf("%s\n",comparable);
+                count_lines++;
+                count_index = 1;
+                // printf("up");
+            }           
             else{
                 fseek(file,-(sizeof(char)*(count)),SEEK_CUR);
-                count_index -= count;
+                count_index++;
                 count = 0;  
             }
-            if (buff = '\n') && (count == 0){  //или count == 1
-                count_lines++;
-            }
+         
+         
+            
+            
     }
 }
 
