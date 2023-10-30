@@ -34,7 +34,7 @@ int main(int argc, char** argv){
             odd_up_str(string,status);
             if (*status == 1){
                 *status = 0;
-                printf("Memore allocation error!\n");
+                printf("Memory allocation error!\n");
                 break;
             }
             printf("%s \n",string);

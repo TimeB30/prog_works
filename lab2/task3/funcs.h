@@ -20,10 +20,15 @@ bool compare_strings(char* string1, char* string2,unsigned int string_len){
     }
     return true;
 }
-char** find_string(int string_count, ...){
+void find_string(int* status,int string_count, ...){
     va_list list;
     va_start(list,string_count);
     char* string = va_arg(list,char*);
+    printf("%s\n",string);
+    if (string[0] == '\0' ){
+        *status = 3;
+        return;
+    }
     unsigned int string_len = strlen(string);
     printf("string len is %d\n",string_len);
     unsigned int las_index = string_len-1;
@@ -32,14 +37,22 @@ char** find_string(int string_count, ...){
         unsigned int count_index = 1;
         char* file_name = va_arg(list,char*);
         char* comparable = malloc(sizeof(char)*string_len);
+          if (comparable == NULL){
+            *status = 2;
+            return;
+        }
         FILE* file = fopen(file_name,"r");
+        if (file == NULL){
+            *status = 1;
+            return;
+        }
         char buff = 'a';
         int count = 0;
         char past_char = 'a';
         printf("%s \n",file_name);
         while(1){
             buff = fgetc(file);
-            printf("past %c  buff %c  string %c  count %d line %d\n",past_char,buff,string[count],count,count_lines);
+            // printf("past %c  buff %c  string %c  count %d line %d\n",past_char,buff,string[count],count,count_lines);
             if (buff == EOF){
                 break;
             }
@@ -54,24 +67,30 @@ char** find_string(int string_count, ...){
                      count_index++;  
                     count = 0;  
                 }
-                if (past_char == '\n'){
+                else if(past_char == '\n'){
+                // printf("nigga 1\n");
                 count_lines++;
-                count_index = 0;
-                }                                                      
+                count_index = 1;
+                past_char = buff;
+                }   
+                
+
             }                             
             else{
                 if (past_char == '\n'){
-                    printf("Nigga\n");
+                    // printf("Nigga 2\n");
                 count_lines++;
-                count_index = 0;
+                count_index = 1;
                 }     
                 fseek(file,-(sizeof(char)*(count)),SEEK_CUR);
-                past_char = comparable[0];
+                past_char = buff;
                 count_index++;
                 count = 0;  
             }
-         past_char = buff;            
+            
     }
+    free(comparable);
+    comparable = NULL;
 }
 
 }

@@ -3,7 +3,7 @@
 #include<stdarg.h>
 #include<math.h>
 
-double average_geom_value(int n, ...){
+double average_geom_value(int* status,int n, ...){
     double answer = 1;
     va_list factor;
     va_start(factor,n);
@@ -11,7 +11,11 @@ double average_geom_value(int n, ...){
         answer *= va_arg(factor,int);  
     }
     va_end(factor);
-    answer = sqrt(answer);
+    if ((n < 0) || (answer < 0)){
+        *status = 1;
+        return answer;
+    }
+    answer = pow(answer,1.0/n);
     return answer;
 }
 
