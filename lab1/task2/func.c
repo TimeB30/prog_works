@@ -5,7 +5,6 @@
 #include<math.h>
 #include"enums.h"
 
-
 long double e_limit(long double epsilon){
     long double value = 1.0;
     int n = 1;
@@ -36,17 +35,22 @@ long double e_summ(long double epsilon){
 }
 
 long double e_func(long double epsilon){
+    long double eps = 0.5;
+    while(eps > 0){
+        eps = eps * 0.2;
+    }
     long double line_left = 2.0;
     long double line_right = 3.0;
-    long double middle;
+    long double middle = 0;
     while(fabs((line_right - line_left)) > epsilon){
-        middle = (line_left + line_right) / 2.0;
-        if ((logl(middle) - 1) >= middle){
-            line_left = middle;
+        middle = (line_left + line_right) * 0.5;
+        if (logl(middle) > 1.0 ){
+            line_right = middle;
         }
         else{
-            line_right = middle;
+            line_left = middle;
         }
     }
     return middle;
 }
+
