@@ -1,14 +1,8 @@
-cmake_minimum_required(VERSION 3.2)
-add_compile_options(-lm)
-
-project(labs LANGUAGES C)
-
-
-add_executable(lab2 lab2.c enums.h)
-
-add_library(mylib STATIC func.c)
-
-
-target_link_libraries(lab2 PUBLIC mylib)
-
+cmake_minimum_required(VERSION 3.25)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED True)
+project(lab1)
+add_library(math_func enums.h func.c)
+add_executable(lab1 lab2.c)
+target_link_libraries(lab1 math_func)
 

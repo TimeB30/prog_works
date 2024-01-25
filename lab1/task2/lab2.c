@@ -2,6 +2,7 @@
 
 
 
+
 int main(int argc, char* argv[]){
     char** ptr;
     long double epsilon = strtod(argv[1],ptr);
