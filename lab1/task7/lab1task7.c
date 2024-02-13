@@ -31,7 +31,7 @@ int main(int argc,char** argv){
             break;
         case convert:
             file1 = fopen(argv[2],"r");
-            file2 = fopen(argv[3],"r");
+            file2 = fopen(argv[3],"w");
             if ((file1 == NULL) || (file2 == NULL)){
                 printf( "Error: can't open file\n");
                 return 0;
