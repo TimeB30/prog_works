@@ -1,3 +1,0 @@
-/home/timeb/Desktop/Labs/lab1/task7/cmake-build-debug/CMakeFiles/task7.dir
-/home/timeb/Desktop/Labs/lab1/task7/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/timeb/Desktop/Labs/lab1/task7/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,0 @@
-/mnt/c/Users/TimeB/Desktop/Labs/lab1/task2/build/CMakeFiles/math_func.dir
-/mnt/c/Users/TimeB/Desktop/Labs/lab1/task2/build/CMakeFiles/lab1.dir
-/mnt/c/Users/TimeB/Desktop/Labs/lab1/task2/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/TimeB/Desktop/Labs/lab1/task2/build/CMakeFiles/rebuild_cache.dir
