@@ -1,2 +1,0 @@
-A (B (E (G, T, R (W, Z)), F (L, M)), C), P, S
-D(F, G, H(X, H), J), I
